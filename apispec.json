@@ -206,7 +206,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/users/{userId}" : {
             "get": {
                 "tags": ["Get User"],
                 "description": "API for Get User By Id",
