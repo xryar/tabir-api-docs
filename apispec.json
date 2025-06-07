@@ -71,6 +71,9 @@
                 }
             },
             "put": {
+                "security": [{
+                    "bearerAuth": []
+                }],
                 "tags": ["Login"],
                 "description": "API for Update Token User",
                 "summary": "Update Token",
@@ -123,6 +126,9 @@
                 }
             },
             "delete": {
+                "security": [{
+                    "bearerAuth": []
+                }],
                 "tags": ["Login"],
                 "description": "API for Delete Token User",
                 "summary": "Delete Token",
@@ -210,6 +216,9 @@
         },
         "/users/{userId}" : {
             "get": {
+                "security": [{
+                    "bearerAuth": []
+                }],
                 "tags": ["Get User"],
                 "description": "API for Get User By Id",
                 "summary": "Get User By Id",
@@ -255,6 +264,164 @@
                         }
                     }
                 }
+            }
+        },
+        "/predictions": {
+            "post": {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags": ["Prediction"],
+                "description": "Save Prediction",
+                "summary": "Save Prediction",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "prediction": {
+                                        "type": "string",
+                                        "example": "WZN"
+                                    }
+                                },
+                                "required": ["prediction"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Save Prediciton",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prediksi berhasil di simpan"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "prediciton_id": {
+                                                    "type": "string",
+                                                    "example": "prediction-oiiasydwha"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags": ["Prediction"],
+                "description": "Get All Predictions",
+                "summary": "Get All Predictions",
+                "responses": {
+                    "200": {
+                        "description": "Success Get All User Predictions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "prediction-asdlwasd"
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "example": "johndoe24"
+                                                },
+                                                "prediction": {
+                                                    "type": "string",
+                                                    "example": "WZN"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2025-06-07T01:49:18.914Z"
+                                                }
+                                            }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/predictions/{id}": {
+            "delete": {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags": ["Prediction"],
+                "summary": "Delete Prediction By Id",
+                "description": "Delete Prediction By Id",
+                "parameters": [{
+                    "name": "predictionId",
+                    "in": "query",
+                    "description": "Prediction Id",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success Delete Prediciton",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prediksi Berhasil dihapus"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
