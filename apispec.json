@@ -321,14 +321,27 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/predictions/{userId}": {
             "get": {
                 "security": [{
                     "bearerAuth": []
                 }],
                 "tags": ["Prediction"],
-                "description": "Get All Predictions",
-                "summary": "Get All Predictions",
+                "description": "Get All User Predictions",
+                "summary": "Get All User Predictions",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success Get All User Predictions",
@@ -373,7 +386,7 @@
                 }
             }
         },
-        "/predictions/{id}": {
+        "/predictions/{predictionId}": {
             "delete": {
                 "security": [{
                     "bearerAuth": []
